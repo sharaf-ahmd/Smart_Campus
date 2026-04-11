@@ -1,0 +1,223 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+
+:root {
+  /* ── Palette ───────────────────────────────────────────────── */
+  --bg-primary:    #212529;
+  --bg-secondary:  #2a2f34;
+  --bg-tertiary:   #2e7d73;
+
+  --text-primary:  #f8f9fa;
+  --text-secondary:#adb5bd;
+
+  --brand-primary: #2e7d73;
+  --brand-hover:   #1e564f;
+  --brand-light:   rgba(46, 125, 115, 0.2);
+
+  --accent-gold:   #c5a059;
+
+  --status-success:#38b000;
+  --status-warning:#c5a059;
+  --status-danger: #d90429;
+
+  --glass-bg:      rgba(42, 47, 52, 0.6);
+  --glass-border:  rgba(248, 249, 250, 0.08);
+  --glass-shadow:  0 8px 32px 0 rgba(0, 0, 0, 0.3);
+
+  /* ── Typography ────────────────────────────────────────────── */
+  --font-family:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading:  "Plus Jakarta Sans", "Inter", sans-serif;
+
+  /* ── Font size scale (slightly larger than before) ─────────── */
+  --text-xs:   0.8rem;     /* 12.8px  — was 0.7–0.75rem  */
+  --text-sm:   0.9rem;     /* 14.4px  — was 0.82–0.88rem */
+  --text-base: 1rem;       /* 16px    — was 0.9–0.95rem  */
+  --text-md:   1.05rem;    /* 16.8px                     */
+  --text-lg:   1.15rem;    /* 18.4px                     */
+  --text-xl:   1.35rem;    /* 21.6px                     */
+  --text-2xl:  1.65rem;    /* 26.4px                     */
+  --text-3xl:  2.1rem;     /* 33.6px — was 2rem          */
+  --text-4xl:  2.6rem;     /* 41.6px                     */
+
+  /* ── Spacing & shape ───────────────────────────────────────── */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  16px;
+  --radius-xl:  20px;
+}
+
+/* ── Reset ─────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Base ──────────────────────────────────────────────────────── */
+html {
+  font-size: 16px;           /* explicit root so rem is predictable */
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(at 0% 0%,   rgba(46, 125, 115, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(197, 160,  89, 0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ── Headings ──────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+h1 { font-size: var(--text-3xl); font-weight: 700; }
+h2 { font-size: var(--text-2xl); font-weight: 700; }
+h3 { font-size: var(--text-xl);  font-weight: 600; }
+h4 { font-size: var(--text-lg);  font-weight: 600; }
+h5 { font-size: var(--text-md);  font-weight: 600; }
+h6 { font-size: var(--text-base);font-weight: 600; }
+
+p  { font-size: var(--text-base); line-height: 1.65; }
+
+/* ── Links ─────────────────────────────────────────────────────── */
+a { text-decoration: none; }
+
+/* ── Glass panel ───────────────────────────────────────────────── */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--radius-lg);
+  padding: 28px;                    /* was 24px */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 44px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+button, .btn {
+  font-family: var(--font-family);
+  font-size: var(--text-sm);       /* was 0.95rem */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: 11px 22px;              /* was 10px 20px */
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--brand-primary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 14px 0 rgba(46, 125, 115, 0.3);
+  border-radius: var(--radius-xl);
+}
+.btn-primary:hover {
+  background: var(--brand-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(46, 125, 115, 0.4);
+}
+.btn-primary:active { transform: translateY(1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--accent-gold);
+  border-radius: var(--radius-xl);
+}
+.btn-secondary:hover { background: rgba(255, 255, 255, 0.07); }
+
+/* ── Form inputs ───────────────────────────────────────────────── */
+input, select, textarea {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 13px 18px;              /* was 12px 16px */
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  font-size: var(--text-base);     /* was default / 0.9rem */
+  line-height: 1.5;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input::placeholder, textarea::placeholder { color: var(--text-secondary); }
+input:focus, select:focus, textarea:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-light);
+}
+select option { background: var(--bg-secondary); }
+
+/* ── Table base ────────────────────────────────────────────────── */
+table { font-size: var(--text-sm); }         /* was 0.875–0.9rem */
+th    { font-size: var(--text-xs); font-weight: 700; letter-spacing: 0.05em; }
+
+/* ── Utility ───────────────────────────────────────────────────── */
+.text-gradient { color: var(--accent-gold); }
+
+.text-secondary { color: var(--text-secondary); }
+
+.circle-frame {
+  border-radius: 50%;
+  border: 2px solid var(--text-primary);
+  object-fit: cover;
+  padding: 4px;
+}
+.box-frame { border-radius: var(--radius-md); object-fit: cover; }
+.wave-divider { display: block; width: 100%; height: auto; line-height: 0; }
+
+/* ── Layout ────────────────────────────────────────────────────── */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 2.25rem 2rem;           /* was 2rem */
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.home-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* ── Navbar hover helper ───────────────────────────────────────── */
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: var(--text-primary) !important;
+}
+
+/* ── Scrollbar (subtle) ────────────────────────────────────────── */
+::-webkit-scrollbar        { width: 6px; height: 6px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: rgba(255,255,255,0.12); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }

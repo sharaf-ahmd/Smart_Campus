@@ -1,0 +1,136 @@
+.footer-container {
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--glass-border);
+  padding: 4rem 0 1.5rem;
+  margin-top: auto;
+  color: var(--text-secondary);
+  font-family: var(--font-family);
+  z-index: 10;
+  position: relative;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 2rem 3rem;
+}
+
+.footer-col h3 {
+  color: var(--text-primary);
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  margin-top: 0;
+  letter-spacing: 0.5px;
+}
+
+.footer-brand .footer-logo {
+  font-family: var(--font-heading);
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  margin-top: 0;
+}
+
+.footer-description {
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.social-links a:hover {
+  background: var(--brand-primary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* Lists */
+.footer-links ul,
+.footer-contact ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links li,
+.footer-contact li {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+}
+
+.footer-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-contact li {
+  color: var(--text-secondary);
+}
+
+.footer-contact li svg {
+  color: var(--brand-primary);
+}
+
+/* Newsletter */
+.footer-newsletter p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.newsletter-form input {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--glass-border);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  max-width: 250px;
+}
+
+.newsletter-form button {
+  padding: 10px 14px;
+  border-radius: 8px;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 1.5rem;
+  margin: 0 2rem;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.4);
+}
