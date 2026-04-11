@@ -6,6 +6,10 @@ import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+<<<<<<< HEAD
+=======
+/*transfer data between frontend and backend */
+>>>>>>> origin/rifky-booking-assets
 @Data
 public class BookingDto {
     @NotNull(message = "Resource ID is required")
