@@ -56,26 +56,8 @@ const Login = () => {
           <Shield size={30} color="var(--accent-gold)" />
         </div>
 
-        {/* Title */}
-        <h1
-          style={{
-            fontSize: "1.9rem",
-            marginBottom: "0.5rem",
-            color: "var(--accent-gold)",
-          }}
-        >
-          Welcome Back
-        </h1>
 
-        <p
-          style={{
-            color: "var(--text-secondary)",
-            marginBottom: "2rem",
-            lineHeight: 1.6,
-          }}
-        >
-          Access your Smart Campus dashboard securely.
-        </p>
+
 
         {/* Google Login */}
         <div style={{ display: "flex", justifyContent: "center" }}>
