@@ -52,24 +52,7 @@ const ContactUs = () => {
           />
         </div>
 
-        <div style={{ marginBottom: "1.5rem" }}>
-          <label>Message</label>
-          <textarea
-            name="message"
-            rows="5"
-            value={form.message}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <button
-          className="btn btn-primary"
-          type="submit"
-          style={{ width: "100%" }}
-        >
-          Send Message
-        </button>
+        
       </form>
     </div>
   );
