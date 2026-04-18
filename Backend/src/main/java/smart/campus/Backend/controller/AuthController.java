@@ -34,8 +34,7 @@ public class AuthController {
                 "id", user.getId(),
                 "name", user.getName(),
                 "email", user.getEmail(),
-                "role", user.getRole().name()
-        ));
+                "role", user.getRole().name()));
     }
 
     /**
@@ -70,7 +69,6 @@ public class AuthController {
                 "id", newUser.getId(),
                 "name", newUser.getName(),
                 "email", newUser.getEmail(),
-                "role", newUser.getRole().name()
-        ));
+                "role", newUser.getRole().name()));
     }
 }
