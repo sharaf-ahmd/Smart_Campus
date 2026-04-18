@@ -263,30 +263,7 @@ const NotificationPanel = () => {
                     }}
                   />
 
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <p
-                      style={{
-                        margin: 0,
-                        fontSize: "0.85rem",
-                        lineHeight: 1.55,
-                        color: n.isRead
-                          ? "var(--text-secondary)"
-                          : "var(--text-primary)",
-                      }}
-                    >
-                      {n.message}
-                    </p>
-                    <span
-                      style={{
-                        fontSize: "0.72rem",
-                        color: "rgba(255,255,255,0.3)",
-                        marginTop: 4,
-                        display: "block",
-                      }}
-                    >
-                      {timeAgo(n.createdAt)}
-                    </span>
-                  </div>
+                  
 
                   {!n.isRead && (
                     <button
