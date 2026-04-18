@@ -30,7 +30,27 @@ const ContactUs = () => {
 
       {/* Form */}
       <form className="glass-panel" onSubmit={handleSubmit}>
-        
+        <div style={{ marginBottom: "1.5rem" }}>
+          <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={form.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div style={{ marginBottom: "1.5rem" }}>
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <div style={{ marginBottom: "1.5rem" }}>
           <label>Message</label>
