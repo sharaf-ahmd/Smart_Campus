@@ -36,6 +36,62 @@ public class AuthController {
                 "email", user.getEmail(),
                 "role", user.getRole().name()));
     }
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
+        String rawEmail = jwt.getClaimAsString("email");
+        final String email = (rawEmail != null) ? rawEmail : jwt.getSubject();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
+
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "name", user.getName(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
+        String rawEmail = jwt.getClaimAsString("email");
+        final String email = (rawEmail != null) ? rawEmail : jwt.getSubject();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
+
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "name", user.getName(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
+        String rawEmail = jwt.getClaimAsString("email");
+        final String email = (rawEmail != null) ? rawEmail : jwt.getSubject();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
+
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "name", user.getName(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()));
+    }
+    @GetMapping("/me")
+    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal Jwt jwt) {
+        String rawEmail = jwt.getClaimAsString("email");
+        final String email = (rawEmail != null) ? rawEmail : jwt.getSubject();
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
+
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId(),
+                "name", user.getName(),
+                "email", user.getEmail(),
+                "role", user.getRole().name()));
+    }
 
     /**
      * Registers a new USER account. This endpoint is PUBLIC.
