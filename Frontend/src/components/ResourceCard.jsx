@@ -72,6 +72,7 @@ const ResourceCard = ({ resource, isAdmin, onEdit, onDelete }) => {
           >
             {getIcon(resource.type)}
           </div>
+
           <div>
             <h3
               style={{
