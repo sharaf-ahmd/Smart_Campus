@@ -29,7 +29,18 @@ public class NotificationService {
             Notification.builder().user(user).message(message).isRead(false).build());
     }
 
-  
+    /** Send the same notification to every ADMIN in the system. */
+    @Transactional
+    public void notifyAllAdmins(String message) {
+        // Use case-insensitive role lookup — DB may store "ADMIN" or "Admin"
+        List<User> allUsers = userRepository.findAll();
+        for (User u : allUsers) {
+            if (u.getRole() == Role.ADMIN) {
+                notificationRepository.save(
+                    Notification.builder().user(u).message(message).isRead(false).build());
+            }
+        }
+    }
 
     public List<Notification> getUserNotifications(Long userId) {
         return notificationRepository.findByUserIdOrderByCreatedAtDesc(userId);
