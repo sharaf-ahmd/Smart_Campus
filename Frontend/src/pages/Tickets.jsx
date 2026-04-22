@@ -14,6 +14,44 @@ import {
   ImagePlus,
   Trash2,
 } from "lucide-react";
+
+/* ─── maps ────────────────────────────────────────────────────── */
+const PRIORITY_MAP = {
+  HIGH: { color: "#ef4444", icon: <ArrowUpCircle size={14} /> },
+  MEDIUM: { color: "#f59e0b", icon: <ArrowRightCircle size={14} /> },
+  LOW: { color: "#10b981", icon: <ArrowDownCircle size={14} /> },
+};
+const STATUS_MAP = {
+  OPEN: { color: "#6366f1", icon: <Clock size={14} /> },
+  IN_PROGRESS: { color: "#f59e0b", icon: <RefreshCw size={14} /> },
+  RESOLVED: { color: "#10b981", icon: <CheckCircle2 size={14} /> },
+  CLOSED: { color: "#64748b", icon: <CheckCircle2 size={14} /> },
+  REJECTED: { color: "#ef4444", icon: <XCircle size={14} /> },
+};
+
+/* ─── Badge ────────────────────────────────────────────────────── */
+const Badge = ({ map, value }) => {
+  const st = map[value] || { color: "#94a3b8", icon: null };
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        color: st.color,
+        background: `${st.color}22`,
+        padding: "4px 12px",
+        borderRadius: 20,
+        fontSize: "0.82rem",
+        fontWeight: 600,
+      }}
+    >
+      {st.icon}
+      {value?.replace(/_/g, " ")}
+    </span>
+  );
+};
+
 /* ─── Photo lightbox ───────────────────────────────────────────── */
 const Lightbox = ({ url, onClose }) => (
   <div
