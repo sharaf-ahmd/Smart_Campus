@@ -37,6 +37,11 @@ public class TicketController {
         return ResponseEntity.ok(ticketService.getTicketsByReporter(reporterId));
     }
 
+    @GetMapping("/assignee/{assigneeId}")
+    public ResponseEntity<List<Ticket>> getTicketsByAssignee(@PathVariable Long assigneeId) {
+        return ResponseEntity.ok(ticketService.getTicketsByAssignee(assigneeId));
+    }
+
     @PostMapping("/reporter/{reporterId}")
     public ResponseEntity<Ticket> createTicket(@PathVariable Long reporterId, @Valid @RequestBody TicketDto dto) {
         return new ResponseEntity<>(ticketService.createTicket(reporterId, dto), HttpStatus.CREATED);

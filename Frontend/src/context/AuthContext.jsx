@@ -16,8 +16,8 @@ export const useAuth = () => {
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // { id, name, email, role }
-  const [loading, setLoading] = useState(true); // true while checking stored token
+  const [user, setUser] = useState(null); 
+  const [loading, setLoading] = useState(true);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
 
   // Fetch the current user profile from /api/auth/me
@@ -29,10 +29,9 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const res = await api.get("/auth/me");
-      setUser(res.data); // { id, name, email, role }
+      setUser(res.data); 
     } catch (err) {
       console.error("Failed to fetch user profile", err);
-      // Token is invalid or expired — clear it
       localStorage.removeItem("token");
       setToken(null);
       setUser(null);
@@ -45,15 +44,11 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, [fetchUser]);
 
-  /*
-   Called after a successful Google OAuth login.
-   Receives the credential (JWT id_token from Google).
-   Stores it and fetches the user profile.
-   */
+
   const login = async (googleCredential) => {
     localStorage.setItem("token", googleCredential);
     setToken(googleCredential);
-    // fetchUser will trigger via the useEffect
+  
   };
 
   const logout = () => {
@@ -64,6 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   const isAuthenticated = !!user;
   const isAdmin = user?.role === "ADMIN";
+  const isTechnician = user?.role === "TECHNICIAN";
   const isUser = user?.role === "USER";
 
   return (
@@ -74,6 +70,7 @@ export const AuthProvider = ({ children }) => {
         loading,
         isAuthenticated,
         isAdmin,
+        isTechnician,
         isUser,
         login,
         logout,

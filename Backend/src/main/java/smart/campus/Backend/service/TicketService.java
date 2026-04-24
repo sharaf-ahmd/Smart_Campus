@@ -40,6 +40,10 @@ public class TicketService {
         return ticketRepository.findByReporterId(reporterId);
     }
 
+    public List<Ticket> getTicketsByAssignee(Long assigneeId) {
+        return ticketRepository.findByAssigneeId(assigneeId);
+    }
+
     public Ticket getTicketById(Long id) {
         return ticketRepository.findByIdWithRelations(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ticket not found with id: " + id));
@@ -66,13 +70,14 @@ public class TicketService {
         // In-app notification → all admins
         notificationService.notifyAllAdmins(
             String.format("🎫 New %s-priority ticket #%d reported by %s on \"%s\": %s",
-                 dto.getPriority(), saved.getId(), reporter.getName(),
+                dto.getPriority(), saved.getId(), reporter.getName(),
                 resource.getName(),
                 dto.getDescription().length() > 60
                     ? dto.getDescription().substring(0, 60) + "…"
                     : dto.getDescription()));
 
-
+        // Email → reporter confirming submission
+       
         return saved;
     }
 
@@ -109,11 +114,12 @@ public class TicketService {
         ticket.setStatus(TicketStatus.IN_PROGRESS);
         Ticket saved = ticketRepository.save(ticket);
 
-       // Notify the reporter
+        // Notify the reporter
         notificationService.createNotification(saved.getReporter().getId(),
             String.format("🔧 Your ticket #%d has been assigned to %s and is now in progress.",
                 ticketId, assignee.getName()));
 
+       
         return saved;
     }
 
@@ -132,6 +138,8 @@ public class TicketService {
             String.format("🗑️ Your ticket #%d for \"%s\" has been removed by an administrator.",
                 ticketId, resourceName));
 
+        // Email
+        
     }
 
     @Transactional

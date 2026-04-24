@@ -121,11 +121,39 @@ const TicketModal = ({ ticket, onClose, onStatusChange }) => {
   const [working, setWorking] = useState(false);
   const photos = ticket.attachments || [];
 
+  const [technicians, setTechnicians] = useState([]);
+  const [assigneeId, setAssigneeId] = useState(ticket.assignee?.id || "");
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await api.get("/users/role/TECHNICIAN");
+        setTechnicians(res.data);
+      } catch (err) {
+        console.error("Failed to fetch technicians", err);
+      }
+    })();
+  }, []);
+
+  const handleAssign = async () => {
+    if (!assigneeId) return;
+    setWorking(true);
+    try {
+      const res = await api.patch(`/tickets/${ticket.id}/assign?assigneeId=${assigneeId}`);
+      onStatusChange(ticket.id, "IN_PROGRESS", res.data.assignee);
+      onClose();
+    } catch (err) {
+      alert("Assignment failed: " + (err.response?.data?.message || err.message));
+    } finally {
+      setWorking(false);
+    }
+  };
+
   const action = async (status) => {
     setWorking(true);
     try {
       await api.patch(`/tickets/${ticket.id}/status?status=${status}`);
-      onStatusChange(ticket.id, status);
+      onStatusChange(ticket.id, status, ticket.assignee);
       onClose();
     } catch (err) {
       alert("Action failed: " + (err.response?.data?.message || err.message));
@@ -280,6 +308,80 @@ const TicketModal = ({ ticket, onClose, onStatusChange }) => {
             >
               {PRIORITY_ICON[ticket.priority]} {ticket.priority} PRIORITY
             </span>
+          </div>
+
+          {/* Assign Technician */}
+          <div
+            style={{
+              marginBottom: "1.25rem",
+              padding: "1rem",
+              background: "rgba(99,102,241,0.05)",
+              borderRadius: 12,
+              border: "1px solid rgba(99,102,241,0.1)",
+            }}
+          >
+            <p
+              style={{
+                margin: "0 0 10px",
+                fontSize: "0.8rem",
+                color: "var(--text-secondary)",
+                fontWeight: 600,
+                textTransform: "uppercase",
+              }}
+            >
+              Assign Technician
+            </p>
+            <div style={{ display: "flex", gap: 10 }}>
+              <select
+                value={assigneeId}
+                onChange={(e) => setAssigneeId(e.target.value)}
+                style={{
+                  flex: 1,
+                  background: "#1e293b",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "#fff",
+                  borderRadius: 8,
+                  padding: "8px 12px",
+                  fontSize: "0.88rem",
+                  outline: "none",
+                }}
+              >
+                <option value="">Select Technician...</option>
+                {technicians.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name} ({t.email})
+                  </option>
+                ))}
+              </select>
+              <button
+                disabled={working || !assigneeId}
+                onClick={handleAssign}
+                style={{
+                  padding: "8px 16px",
+                  borderRadius: 8,
+                  border: "none",
+                  background: "#6366f1",
+                  color: "#fff",
+                  fontWeight: 600,
+                  cursor: "pointer",
+                  fontSize: "0.88rem",
+                  opacity: working || !assigneeId ? 0.6 : 1,
+                }}
+              >
+                Assign
+              </button>
+            </div>
+            {ticket.assignee && (
+              <p
+                style={{
+                  margin: "8px 0 0",
+                  fontSize: "0.75rem",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                Currently assigned to: <b>{ticket.assignee.name}</b>
+              </p>
+            )}
           </div>
 
           {/* Photos */}
@@ -504,9 +606,9 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleTicketStatusChange = (id, status) => {
+  const handleTicketStatusChange = (id, status, assignee) => {
     setAllTickets((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, status } : t)),
+      prev.map((t) => (t.id === id ? { ...t, status, assignee } : t)),
     );
   };
 

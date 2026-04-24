@@ -1,31 +1,33 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import {
   ProtectedRoute,
   AdminRoute,
   UserRoute,
-} from "./components/RouteGuards.jsx";
+  TechnicianRoute,
+} from "./components/RouteGuards";
 
 // Public pages
-import Home from "./pages/Home.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
-import Unauthorized from "./pages/Unauthorized.jsx";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Unauthorized from "./pages/Unauthorized";
 
 // Shared pages (require authentication, either role)
-import Resources from "./pages/Resources.jsx";
+import Resources from "./pages/Resources";
 
 // User-only pages
-import UserDashboard from "./pages/UserDashboard.jsx";
-import Bookings from "./pages/Bookings.jsx";
-import Tickets from "./pages/Tickets.jsx";
+import UserDashboard from "./pages/UserDashboard";
+import Bookings from "./pages/Bookings";
+import Tickets from "./pages/Tickets";
 
 // Admin-only pages
-import AdminDashboard from "./pages/AdminDashboard.jsx";
-import AboutUs from "./pages/AboutUs.jsx";
-import ContactUs from "./pages/ContactUs.jsx";
+import AdminDashboard from "./pages/AdminDashboard";
+import TechnicianDashboard from "./pages/TechnicianDashboard";
+import AboutUs from "./pages/AboutUs";
+import ContactUs from "./pages/ContactUs";
 
 function App() {
   const location = useLocation();
@@ -73,7 +75,15 @@ function App() {
             }
           />
 
-          {/* ========== ADMIN-ONLY ROUTES ========== */}
+          <Route
+            path="/technician/dashboard"
+            element={
+              <TechnicianRoute>
+                <TechnicianDashboard />
+              </TechnicianRoute>
+            }
+          />
+
           <Route
             path="/admin/dashboard"
             element={

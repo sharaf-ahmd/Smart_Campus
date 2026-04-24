@@ -69,11 +69,7 @@ export const AdminRoute = ({ children }) => {
   return children;
 };
 
-/*
- UserRoute — Requires USER role.
- If not authenticated → /login.
- If authenticated but not USER (e.g. ADMIN) → /unauthorized.
- */
+
 export const UserRoute = ({ children }) => {
   const { isAuthenticated, isUser, loading } = useAuth();
 
@@ -99,6 +95,37 @@ export const UserRoute = ({ children }) => {
   }
 
   if (!isUser) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return children;
+};
+
+export const TechnicianRoute = ({ children }) => {
+  const { isAuthenticated, isTechnician, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "60vh",
+        }}
+      >
+        <div style={{ color: "var(--text-secondary)", fontSize: "1.1rem" }}>
+          Verifying access…
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (!isTechnician) {
     return <Navigate to="/unauthorized" replace />;
   }
 
