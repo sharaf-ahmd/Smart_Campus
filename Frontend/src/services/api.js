@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080/api', // Spring Boot default port
+  baseURL: 'http://localhost:9090/api', // Spring Boot default port
 });
 
 // Add a request interceptor to attach JWT if we have it

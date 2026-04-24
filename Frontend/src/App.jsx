@@ -1,31 +1,31 @@
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import "./App.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
 import {
   ProtectedRoute,
   AdminRoute,
   UserRoute,
-} from "./components/RouteGuards";
+} from "./components/RouteGuards.jsx";
 
 // Public pages
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import Unauthorized from "./pages/Unauthorized";
+import Home from "./pages/Home.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import Unauthorized from "./pages/Unauthorized.jsx";
 
 // Shared pages (require authentication, either role)
-import Resources from "./pages/Resources";
+import Resources from "./pages/Resources.jsx";
 
 // User-only pages
-import UserDashboard from "./pages/UserDashboard";
-import Bookings from "./pages/Bookings";
-import Tickets from "./pages/Tickets";
+import UserDashboard from "./pages/UserDashboard.jsx";
+import Bookings from "./pages/Bookings.jsx";
+import Tickets from "./pages/Tickets.jsx";
 
 // Admin-only pages
-import AdminDashboard from "./pages/AdminDashboard";
-import AboutUs from "./pages/AboutUs";
-import ContactUs from "./pages/ContactUs";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
+import ContactUs from "./pages/ContactUs.jsx";
 
 function App() {
   const location = useLocation();

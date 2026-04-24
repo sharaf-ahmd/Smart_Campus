@@ -11,6 +11,7 @@ import smart.campus.Backend.repository.NotificationRepository;
 import smart.campus.Backend.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -25,22 +26,28 @@ public class NotificationService {
     public void createNotification(Long userId, String message) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        notificationRepository.save(
-            Notification.builder().user(user).message(message).isRead(false).build());
+        notificationRepository.save(Notification.builder()
+                .user(user)
+                .message(message)
+                .isRead(false)
+                .build());
     }
 
     /** Send the same notification to every ADMIN in the system. */
     @Transactional
     public void notifyAllAdmins(String message) {
         // Use case-insensitive role lookup — DB may store "ADMIN" or "Admin"
-        List<User> allUsers = userRepository.findAll();
-        for (User u : allUsers) {
-            if (u.getRole() == Role.ADMIN) {
-                notificationRepository.save(
-                    Notification.builder().user(u).message(message).isRead(false).build());
+        List<User> admins = userRepository.findByRole(Role.ADMIN);
+
+        for (User admin : admins) {
+            notificationRepository.save(Notification.builder()
+                    .user(admin)
+                    .message(message)
+                    .isRead(false)
+                    .build());
             }
         }
-    }
+    
 
     public List<Notification> getUserNotifications(Long userId) {
         return notificationRepository.findByUserIdOrderByCreatedAtDesc(userId);
@@ -52,8 +59,9 @@ public class NotificationService {
 
     @Transactional
     public void markAsRead(Long notificationId) {
-        Notification n = notificationRepository.findByIdWithUser(notificationId)
-                .orElseThrow(() -> new ResourceNotFoundException("Notification not found with id: " + notificationId));
+        Notification n = notificationRepository.findById(notificationId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Notification not found with id: " + notificationId));
         n.setIsRead(true);
         notificationRepository.save(n);
     }
@@ -61,7 +69,9 @@ public class NotificationService {
     @Transactional
     public void markAllAsRead(Long userId) {
         List<Notification> unread = notificationRepository.findByUserIdAndIsReadFalse(userId);
-        unread.forEach(n -> n.setIsRead(true));
+        for (Notification n : unread) {
+            n.setIsRead(true);
+        }
         notificationRepository.saveAll(unread);
     }
 }

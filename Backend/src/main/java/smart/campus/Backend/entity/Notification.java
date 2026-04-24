@@ -1,6 +1,4 @@
 package smart.campus.Backend.entity;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
@@ -24,20 +22,14 @@ public class Notification {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore  // never serialize the full User object — frontend only needs id/message/isRead/createdAt
     private User user;
-
-    // Expose just the userId so frontend can filter if needed
-    @Transient
-    public Long getUserId() {
-        return user != null ? user.getId() : null;
-    }
 
     @Column(columnDefinition = "TEXT", nullable = false)
     private String message;
 
     @Column(name = "is_read")
     @Builder.Default
+    @com.fasterxml.jackson.annotation.JsonProperty("isRead")
     private Boolean isRead = false;
 
     @CreationTimestamp
