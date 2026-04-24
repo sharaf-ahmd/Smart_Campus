@@ -23,7 +23,10 @@ public class ResourceController {
         return ResponseEntity.ok(resourceService.getAllResources());
     }
 
-    
+    @GetMapping("/{id}")
+    public ResponseEntity<Resource> getResourceById(@PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.getResourceById(id));
+    }
 
     @PostMapping
     public ResponseEntity<Resource> createResource(@Valid @RequestBody ResourceDto dto) {
