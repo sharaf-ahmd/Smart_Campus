@@ -33,10 +33,7 @@ public class ResourceController {
         return new ResponseEntity<>(resourceService.createResource(dto), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Resource> updateResource(@PathVariable Long id, @Valid @RequestBody ResourceDto dto) {
-        return ResponseEntity.ok(resourceService.updateResource(id, dto));
-    }
+    
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteResource(@PathVariable Long id) {
